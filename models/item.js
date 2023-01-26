@@ -1,0 +1,13 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const itemSchema = new Schema({
+    name: {type: String, required: true},
+    description: {type: String, required: true},
+    dateLastPerformed: {type: String, required: true},
+    dueDate: {type: String, required: true},
+    priority: {type: String, required: true},
+    recurring: {type: Boolean, required: true}
+})
+
+module.exports = mongoose.model("Item", itemSchema)
