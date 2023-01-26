@@ -7,4 +7,20 @@ module.exports = [
         priority: "High",
         recurring: true    
     },
+    {
+        name: "Second Task",
+        description: "Default second task example",
+        dateLastPerformed: "January 01, 2023",
+        dueDate: "February 04, 2023",
+        priority: "High",
+        recurring: true    
+    },
+    {
+        name: "Third Task",
+        description: "Default third task example",
+        dateLastPerformed: "March 09, 2022",
+        dueDate: "September 30, 2023",
+        priority: "High",
+        recurring: true    
+    },
 ]
