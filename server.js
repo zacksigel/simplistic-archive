@@ -3,6 +3,7 @@ const Item = require("./models/item");
 const data = require("./data");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+var $ = require("jquery")
 
 const app = express();
 require("dotenv").config();
@@ -54,8 +55,16 @@ app.delete("/notes/:id", (req, res) => {
 
 // Update
 
+app.put("/notes/:id", (req, res) => {
+    Item.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
+        res.redirect("/notes")
+    });
+});
+
 app.post("/notes/:id", (req, res) => {
-    Item.findByIdAndUpdate(req.params.id, (err, updatedItem) => {
+    Item.findByIdAndUpdate(req.params.id, {name: req.query.name}, (err, updatedItem) => {
+        console.log("task edited app.post")
+        console.log(req.query.name)
         res.redirect("/notes")
     });
 });
