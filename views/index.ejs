@@ -4,38 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
     <title>SimpLISTic</title>
     <style>
         body {
             background-color: lightblue;
         }
+        input[type=text] {
+            border: 0px;
+            background: transparent;
+            width: 100%;
+            transition-duration: 0.07s; 
+        }
+        input[type=text]:hover {
+            border: 4px;
+            background: white;
+            width: 100%;
+            cursor: default;
+        }
+        input[type=text]:active {
+            cursor: default;
+        } 
+
+    td:first-child {
+        background-color: black;
+        border: dashed;
+    }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>SimpLISTic</h1>
-        <table class="table table-hover table-bordered table-sm">
+        <table class="table table-bordered table-sm">
             <thead>
                 <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                     <th>Item</th>
                     <th>Due Date</th>
                     <th>Date Last Performed</th>
-                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <% items.forEach(item => { %>
                     <tr>
+                        <td>
+                            <form action="/notes/<%= item._id %>?_method=DELETE" method="POST">
+                                <input type="submit" value="Delete" class="btn btn-primary btn-sm">
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="submit" value="Mark Complete" class="btn btn-primary btn-sm">
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="submit" value="De-prioritize" class="btn btn-primary btn-sm">
+                            </form>
+                        </td>
                         <td class="itemname"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="name" value="<%= item.name %>"></form></td>
-                        <td class="itemduedate"><%= item.dueDate %> </td>
+                        <td class="itemduedate"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="dueDate" value="<%= item.dueDate %>"></form></td>
                         <td class="itemdatelateperformed"><%= item.dateLastPerformed %></td>
-                        <td><form action="/notes/<%= item._id %>?_method=DELETE" method="POST">
-                            <input type="submit" value="Delete" class="btn btn-primary btn-sm">
-                        </form></td>
+
                     </tr>
                 <% }) %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><form action="/notes" method="POST">
+                        <input type="submit" value="Add New">
+                    </form>
+                    </td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
-    name: {type: String, required: true},
-    description: {type: String, required: true},
-    dateLastPerformed: {type: String, required: true},
-    dueDate: {type: String, required: true},
-    priority: {type: String, required: true},
-    recurring: {type: Boolean, required: true}
+    name: {type: String, required: false},
+    description: {type: String, required: false},
+    dateLastPerformed: {type: String, required: false},
+    dueDate: {type: String, required: false},
+    priority: {type: String, required: false},
+    recurring: {type: Boolean, required: false}
 })
 
 module.exports = mongoose.model("Item", itemSchema)

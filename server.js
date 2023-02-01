@@ -1,6 +1,7 @@
 const express = require("express");
 const Item = require("./models/item");
 const data = require("./data");
+const blankline = require("./blankline");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 var $ = require("jquery")
@@ -72,9 +73,12 @@ app.post("/notes/:id", (req, res) => {
 // Create
 
 app.post("/notes", (req, res) => {
-    Item.create(req.body, (err, newItem) => {
-        res.redirect("/notes")
+    Item.create(blankline, (err, items) => {
+        console.log("add new button clicked")
+
+        res.redirect("/notes");
     });
+
 });
 
 // Edit - NA
