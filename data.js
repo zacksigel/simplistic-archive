@@ -5,7 +5,7 @@ module.exports = [
         dateLastPerformed: "January 25, 2023",
         dueDate: "January 26, 2023",
         priority: "High",
-        recurring: true    
+        completed: true    
     },
     {
         name: "Second Task",
@@ -13,7 +13,7 @@ module.exports = [
         dateLastPerformed: "January 01, 2023",
         dueDate: "February 04, 2023",
         priority: "High",
-        recurring: true    
+        completed: false    
     },
     {
         name: "Third Task",
@@ -21,6 +21,6 @@ module.exports = [
         dateLastPerformed: "March 09, 2022",
         dueDate: "September 30, 2023",
         priority: "High",
-        recurring: true    
+        completed: false    
     },
 ]

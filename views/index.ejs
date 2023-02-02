@@ -9,27 +9,42 @@
     <style>
         body {
             background-color: lightblue;
+            font-family: Georgia, serif;
+            font-size: 14px;
+        }
+        table {
+            margin: 0 auto;
+            padding: 150px;
         }
         input[type=text] {
+            font-family: Georgia, serif;
             border: 0px;
             background: transparent;
             width: 100%;
             transition-duration: 0.07s; 
+            font-size: 14px;
         }
         input[type=text]:hover {
+            font-family: Georgia, serif;
             border: 4px;
             background: white;
             width: 100%;
             cursor: default;
+            font-size: 14px;
         }
         input[type=text]:active {
             cursor: default;
-        } 
-
-    td:first-child {
-        background-color: black;
-        border: dashed;
-    }
+        }
+        .btn {
+            border: none;
+            background: none;
+        }
+        .btn:hover{
+            background: white;
+        }
+        .entrytrue {
+            text-decoration: line-through;
+        }
 
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -40,12 +55,12 @@
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>Item</th>
-                    <th>Due Date</th>
-                    <th>Date Last Performed</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Item</td>
+                    <td>Due Date</td>
+                    <td>Date Last Performed</td>
                 </tr>
             </thead>
             <tbody>
@@ -53,21 +68,30 @@
                     <tr>
                         <td>
                             <form action="/notes/<%= item._id %>?_method=DELETE" method="POST">
-                                <input type="submit" value="Delete" class="btn btn-primary btn-sm">
+                                <input type="submit" value="❌" class="btn btn-primary btn-sm">
                             </form>
                         </td>
                         <td>
                             <form>
-                                <input type="submit" value="Mark Complete" class="btn btn-primary btn-sm">
+                                <input type="submit" value="✅" class="btn btn-primary btn-sm">
                             </form>
                         </td>
                         <td>
                             <form>
-                                <input type="submit" value="De-prioritize" class="btn btn-primary btn-sm">
+                                <input type="submit" value="⏬" class="btn btn-primary btn-sm">
                             </form>
                         </td>
-                        <td class="itemname"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="name" value="<%= item.name %>"></form></td>
-                        <td class="itemduedate"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="dueDate" value="<%= item.dueDate %>"></form></td>
+                        <% if (item.completed == true) { %>
+                            <td class="itemname"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></form></td>
+                        <% } else { %>
+                            <td class="itemname"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="name" value="<%= item.name %>"></form></td>
+                        <% } %>
+                        <% if (item.completed == true) { %>
+                            <td class="itemduedate"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="dueDate" class="entrytrue" value="<%= item.dueDate %>"></form></td>
+                        <% } else { %>
+                            <td class="itemduedate"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="dueDate" value="<%= item.dueDate %>"></form></td>
+                        <% } %>
+
                         <td class="itemdatelateperformed"><%= item.dateLastPerformed %></td>
 
                     </tr>

@@ -5,6 +5,6 @@ module.exports = [
         dateLastPerformed: "",
         dueDate: "",
         priority: "",
-        recurring: true    
+        completed: true    
     },
 ]

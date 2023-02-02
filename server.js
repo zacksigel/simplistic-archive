@@ -58,6 +58,7 @@ app.delete("/notes/:id", (req, res) => {
 
 app.put("/notes/:id", (req, res) => {
     Item.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
+        console.log("cell updated")
         res.redirect("/notes")
     });
 });
@@ -75,7 +76,7 @@ app.post("/notes/:id", (req, res) => {
 app.post("/notes", (req, res) => {
     Item.create(blankline, (err, items) => {
         console.log("add new button clicked")
-
+        console.log(items)
         res.redirect("/notes");
     });
 
