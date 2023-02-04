@@ -59,6 +59,7 @@ app.delete("/notes/:id", (req, res) => {
 app.put("/notes/:id", (req, res) => {
     Item.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
         console.log("cell updated")
+        console.log(req.body)
         res.redirect("/notes")
     });
 });

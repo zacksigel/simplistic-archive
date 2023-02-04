@@ -71,27 +71,45 @@
                                 <input type="submit" value="❌" class="btn btn-primary btn-sm">
                             </form>
                         </td>
-                        <td>
-                            <form>
-                                <input type="submit" value="✅" class="btn btn-primary btn-sm">
+                            <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
+                                <% if (item.completed == "✅") { %>
+                                    <td>
+                                        <input type="submit" value="🟢" class="btn" name="completed">
+                                    </td>
+                                <% } else if (item.completed == "🟢" && item.dateLastPerformed === "") { %>
+                                    <td>
+                                        <input type="submit" value="🟢" class="btn" name="completed">
+                                    </td>
+                                <% } else { %>
+                                    <td>
+                                        <input type="submit" value="✅" class="btn" name="completed">
+                                    </td>
+                                <% } %>
                             </form>
-                        </td>
                         <td>
                             <form>
                                 <input type="submit" value="⏬" class="btn btn-primary btn-sm">
                             </form>
                         </td>
-                        <% if (item.completed == true) { %>
-                            <td class="itemname"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></form></td>
-                        <% } else { %>
-                            <td class="itemname"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="name" value="<%= item.name %>"></form></td>
-                        <% } %>
-                        <% if (item.completed == true) { %>
-                            <td class="itemduedate"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="dueDate" class="entrytrue" value="<%= item.dueDate %>"></form></td>
-                        <% } else { %>
-                            <td class="itemduedate"><form action="/notes/<%= item._id %>?_method=PUT" method="POST"><input type="text" name="dueDate" value="<%= item.dueDate %>"></form></td>
-                        <% } %>
+                        <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
+                            <% if (item.completed == "🟢" && item.dateLastPerformed === "") { %>
+                                <td><input type="text" name="name" value="<%= item.name %>"></td>  
+                            <% } else if (item.completed == "🟢") { %>
+                                <td><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></td>
+                            <% } else { %>
+                                <td><input type="text" name="name" value="<%= item.name %>"></td>
+                            <% } %>
+                        </form>
 
+                        <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
+                            <% if (item.completed == "🟢" && item.dateLastPerformed === "") { %>
+                                <td><input type="text" name="dueDate" value="<%= item.dueDate %>"></td>  
+                            <% } else if (item.completed == "🟢") { %>
+                                <td><input type="text" name="dueDate" class="entrytrue" value="<%= item.dueDate %>"></td>
+                            <% } else { %>
+                                <td><input type="text" name="dueDate" value="<%= item.dueDate %>"></td>
+                            <% } %>
+                        </form>
                         <td class="itemdatelateperformed"><%= item.dateLastPerformed %></td>
 
                     </tr>

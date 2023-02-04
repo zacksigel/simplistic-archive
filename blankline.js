@@ -2,9 +2,9 @@ module.exports = [
     {
         name: "",
         description: "",
-        dateLastPerformed: "",
+        dateLastPerformed: "test",
         dueDate: "",
         priority: "",
-        completed: true    
+        completed: "🟢"    
     },
 ]

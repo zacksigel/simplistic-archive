@@ -7,7 +7,7 @@ const itemSchema = new Schema({
     dateLastPerformed: {type: String, required: false},
     dueDate: {type: String, required: false},
     priority: {type: String, required: false},
-    completed: {type: Boolean, required: false}
+    completed: {type: String, required: false}
 })
 
 module.exports = mongoose.model("Item", itemSchema)
