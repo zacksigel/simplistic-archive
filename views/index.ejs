@@ -77,14 +77,15 @@
                         <td>
                                 <input type="submit" value="⏬" class="btn btn-primary btn-sm">
                         </td>
-                        
+                            <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
                             <% if (item.completed === "🟢") { %>
-                                <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="submit" value="✅" class="btn" name="completed"></td></form>
+                                <td><input type="submit" value="✅" class="btn" name="completed"></td>
                             <% } else if (item.completed === "✅") { %>
-                                <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="submit" value="🟢" class="btn" name="completed"></td></form>
-                            <% } %>
+                                <td><input type="submit" value="🟢" class="btn" name="completed"></td>             
+                            <% } %></form>
 
-                            <% if (item.completed === "🟢") { %>                                
+                            
+                            <% if (item.completed === "🟢") { %>
                                 <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></td></form>
                                 <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="text" name="dueDate" class="entrytrue" value="<%= item.dueDate %>"></td></form>
                             <% } else if (item.completed === "✅") { %>

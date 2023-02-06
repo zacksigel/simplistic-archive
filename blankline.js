@@ -5,6 +5,6 @@ module.exports = [
         dateLastPerformed: "new task",
         dueDate: "",
         priority: "",
-        completed: "🟢"    
+        completed: "✅"    
     },
 ]
