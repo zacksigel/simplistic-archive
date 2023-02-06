@@ -35,6 +35,25 @@
         input[type=text]:active {
             cursor: default;
         }
+        input[type=date] {
+            font-family: Georgia, serif;
+            border: 0px;
+            background: transparent;
+            width: 100%;
+            transition-duration: 0.07s; 
+            font-size: 14px;
+        }
+        input[type=date]:hover {
+            font-family: Georgia, serif;
+            border: 4px;
+            background: white;
+            width: 100%;
+            cursor: default;
+            font-size: 14px;
+        }
+        input[type=date]:active {
+            cursor: default;
+        }
         .btn {
             border: none;
             background: none;
@@ -81,17 +100,18 @@
                             <% if (item.completed === "🟢") { %>
                                 <td><input type="submit" value="✅" class="btn" name="completed"></td>
                             <% } else if (item.completed === "✅") { %>
+                                <input type="text" value="task done" hidden name="dateLastPerformed">
                                 <td><input type="submit" value="🟢" class="btn" name="completed"></td>             
                             <% } %></form>
 
-                            
+                            <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
                             <% if (item.completed === "🟢") { %>
-                                <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></td></form>
-                                <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="text" name="dueDate" class="entrytrue" value="<%= item.dueDate %>"></td></form>
+                                <td><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></td>
+                                <td><input type="date" name="dueDate" value="<%= item.dueDate %>"></td>
                             <% } else if (item.completed === "✅") { %>
-                                <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="text" name="name" value="<%= item.name %>"></td></form>
-                                <form action="/notes/<%= item._id %>?_method=PUT" method="POST"><td><input type="text" name="dueDate" value="<%= item.dueDate %>"></td></form>
-                            <% } %>
+                                <td><input type="text" name="name" value="<%= item.name %>"></td>
+                                <td><input type="date" name="dueDate" value="<%= item.dueDate %>"></td>
+                            <% } %></form>
                         <td class="itemdatelateperformed"><%= item.dateLastPerformed %></td>
                     
                     </tr>

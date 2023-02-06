@@ -4,7 +4,7 @@ const data = require("./data");
 const blankline = require("./blankline");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-var $ = require("jquery")
+const $ = require("jquery")
 
 const app = express();
 require("dotenv").config();
