@@ -8,131 +8,122 @@
     <title>SimpLISTic</title>
     <style>
         body {
-            background-color: lightblue;
+            background-color: white;
             font-family: Georgia, serif;
-            font-size: 14px;
+            cursor: default;
         }
         table {
             margin: 0 auto;
             padding: 150px;
         }
-        input[type=text] {
+        td {
+            border: 0.3px solid;
+        }
+        thead {
+            font-weight: 800;
+        }
+        input[type=text], [type=date] {
             font-family: Georgia, serif;
             border: 0px;
             background: transparent;
             width: 100%;
             transition-duration: 0.07s; 
             font-size: 14px;
+            cursor: default;
         }
         input[type=text]:hover {
-            font-family: Georgia, serif;
-            border: 4px;
-            background: white;
-            width: 100%;
-            cursor: default;
-            font-size: 14px;
-        }
-        input[type=text]:active {
-            cursor: default;
-        }
-        input[type=date] {
-            font-family: Georgia, serif;
-            border: 0px;
-            background: transparent;
-            width: 100%;
-            transition-duration: 0.07s; 
-            font-size: 14px;
+            background: whitesmoke;
         }
         input[type=date]:hover {
-            font-family: Georgia, serif;
-            border: 4px;
-            background: white;
-            width: 100%;
-            cursor: default;
-            font-size: 14px;
-        }
-        input[type=date]:active {
-            cursor: default;
+            background: whitesmoke;
         }
         .btn {
             border: none;
             background: none;
         }
         .btn:hover{
-            background: white;
+            background: whitesmoke;
         }
         .entrytrue {
             text-decoration: line-through;
         }
-        .boldtest {
-            font-style: italic;
-        }
         .itemdatelateperformed {
-            width: 50%;
+            width: 25%;
+            font-size: 14px;
+        }
+        #column-date {
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        #column-item {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        .noborder {
+            border: none;
+        }
+        #listitem {
+            width: 400px;
         }
 
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>SimpLISTic</h1>
-        <table class="table table-bordered table-sm">
+        <table>
             <thead>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Item</td>
-                    <td>Due Date</td>
+                    <td class="noborder">SimpLISTic</td>
+                </tr>
+                <tr>
+                    <td class="noborder"></td>
+                    <td class="noborder"></td>
+                    <td id="column-item">Item</td>
+                    <td id="column-date">Due Date</td>
                     <td>Date Last Performed</td>
                 </tr>
             </thead>
             <tbody>
                 <% items.forEach(item => { %>
                     <tr>
-                        <td>
+                        <td align="right" class="noborder">
                             <form action="/notes/<%= item._id %>?_method=DELETE" method="POST">
                                 <input type="submit" value="❌" class="btn btn-primary btn-sm">
                             </form>
                         </td>
-                        <td>
-                                <input type="submit" value="⏬" class="btn btn-primary btn-sm">
-                        </td>
+
                             <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
                             <% if (item.completed === "🟢") { %>
                                 <input type="text" value="" hidden name="dateLastPerformed">
-                                <td><input type="submit" value="✅" class="btn" name="completed"></td>
+                                <td class="noborder"><input type="submit" value="✅" class="btn" name="completed"></td>
                             <% } else if (item.completed === "✅") { %>
                                 <input type="text" value="<%= new Date().toLocaleString() %>" hidden name="dateLastPerformed">
-                                <td><input type="submit" value="🟢" class="btn" name="completed"></td>             
+                                <td class="noborder"><input type="submit" value="🟢" class="btn" name="completed"></td>             
                             <% } %></form>
 
                             <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
                             <% if (item.completed === "🟢") { %>
-                                <td><input type="text" name="name" class="entrytrue" value="<%= item.name %>"></td>
-                                <td><input type="date" name="dueDate" value="<%= item.dueDate %>"></td>
+                                <td><input type="text" id="listitem" name="name" class="entrytrue" value="<%= item.name %>"></td>
+                                <td><input type="date" name="dueDate" required="required" value="<%= item.dueDate %>"></td>
                             <% } else if (item.completed === "✅") { %>
-                                <td><input type="text" name="name" value="<%= item.name %>"></td>
-                                <td><input type="date" name="dueDate" value="<%= item.dueDate %>"></td>
+                                <td><input type="text" id="listitem" name="name" value="<%= item.name %>"></td>
+                                <td><input type="date" name="dueDate" required="required" value="<%= item.dueDate %>"></td>
                             <% } %></form>
                         <td class="itemdatelateperformed"><%= item.dateLastPerformed %></td>
                     
                     </tr>
                 <% }) %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><form action="/notes" method="POST">
-                        <input type="submit" value="Add New">
-                    </form>
-                    </td>
-                    <td></td>
+                    <td class="noborder"></td>
+                    <td class="noborder"></td>
+                    <td class="noborder"><form action="/notes" method="POST">
+                        <input type="submit" value="＋ Add New">
+                    </form></td>
+                    <td class="noborder"></td>
+                    <td class="noborder"></td>
                 </tr>
             </tbody>
         </table>
-    </div>
 
 
 </body>
