@@ -67,6 +67,9 @@
         .boldtest {
             font-style: italic;
         }
+        .itemdatelateperformed {
+            width: 50%;
+        }
 
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -98,9 +101,10 @@
                         </td>
                             <form action="/notes/<%= item._id %>?_method=PUT" method="POST">
                             <% if (item.completed === "🟢") { %>
+                                <input type="text" value="" hidden name="dateLastPerformed">
                                 <td><input type="submit" value="✅" class="btn" name="completed"></td>
                             <% } else if (item.completed === "✅") { %>
-                                <input type="text" value="<%= new Date().toLocaleDateString() %>" hidden name="dateLastPerformed">
+                                <input type="text" value="<%= new Date().toLocaleString() %>" hidden name="dateLastPerformed">
                                 <td><input type="submit" value="🟢" class="btn" name="completed"></td>             
                             <% } %></form>
 
